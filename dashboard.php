@@ -453,6 +453,7 @@ require 'shopify.php';
         if(response) {
           $('.success').html("Bid Updated Success!!");
           $('.success').show();
+          location.reload();
         }
         $('.loading').fadeOut(1000);
       },
