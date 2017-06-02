@@ -1,7 +1,7 @@
 <?php
  /* Define your APP`s key and secret*/
-define('SHOPIFY_API_KEY','0e9003149bbbfa3a8f683732c89cc8ca');
-define('SHOPIFY_SECRET','3e4a7cfe4dd7a71c188f75733e863f16');
+define('SHOPIFY_API_KEY','52f88dbc7e564e28cf96a30aa4917c90');
+define('SHOPIFY_SECRET','5a591c165bf5ae7f02d671c33202aa7f');
 define('SITE_URL', 'https://pink-flamingo.herokuapp.com');
 
 /* Define requested scope (access rights) - checkout https://docs.shopify.com/api/authentication/oauth#scopes   */
