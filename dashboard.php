@@ -306,7 +306,7 @@ require 'shopify.php';
   $('.table').DataTable();
   var shop_name = '<?php echo $_GET['shop']; ?>';
   checkexpired();
-  var app_url = 'https://pink-flamingo.herokuapp.com/';
+  var app_url = 'https://pink-flamingo.herokuapp.com';
   function checkexpired() {
     
     var data = 'shop='+shop_name;
