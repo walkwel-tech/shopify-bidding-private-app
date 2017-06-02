@@ -25,8 +25,8 @@ $liver = "";
             $_SESSION['store_id'] = $data['id'];
           }
           $sql = mysqli_query($conn, "UPDATE `tbl_usersettings` SET access_token = '".$_SESSION['token']."' WHERE store_name = '".$_GET['shop']."'");
-       }
-        else{
+        }
+        else {
             $sql = mysqli_query($conn, "INSERT INTO `tbl_usersettings` (access_token, store_name) VALUES ('".$_SESSION['token']."', '".$_SESSION['shop']."')");
 
             if ($sql) {

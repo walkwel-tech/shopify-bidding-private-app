@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
  /* Define your APP`s key and secret*/
 define('SHOPIFY_API_KEY','52f88dbc7e564e28cf96a30aa4917c90');
 define('SHOPIFY_SECRET','5a591c165bf5ae7f02d671c33202aa7f');
@@ -12,10 +13,19 @@ define('SHOPIFY_SCOPE','read_content,write_content, read_themes, write_themes, r
 //$password = "x0f(XhXmsoGm";
 //$dbname = "cdemo_shopify";
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "flamingo_bids";
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "flamingo_bids";
 
-global $conn;   
-$conn = new mysqli($servername, $username, $password, $dbname);
+// global $conn;   
+// $conn = new mysqli($servername, $username, $password, $dbname);
+
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$server = $url["host"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
+$conn = new mysqli($server, $username, $password, $db);

@@ -1,6 +1,5 @@
 <?php
 session_start();
-error_reporting(E_ALL);
 
 require_once("config.php");
 require 'shopify.php';
