@@ -49,8 +49,8 @@ $liver = "";
             $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"];
         }
         //$pageURL = SITE_URL."/install.php";
-        echo $pageURL;
-        die;
+        
+        $pageURL = 'https://pink-flamingo.herokuapp.com/install.php';
         // redirect to authorize url
         header("Location: " . $shopifyClient->getAuthorizeUrl(SHOPIFY_SCOPE, $pageURL));
         exit;
