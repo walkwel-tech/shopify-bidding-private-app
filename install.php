@@ -49,7 +49,8 @@ $liver = "";
             $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["SCRIPT_NAME"];
         }
         //$pageURL = SITE_URL."/install.php";
-        
+        echo $pageURL;
+        die;
         // redirect to authorize url
         header("Location: " . $shopifyClient->getAuthorizeUrl(SHOPIFY_SCOPE, $pageURL));
         exit;
