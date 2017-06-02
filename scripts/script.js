@@ -4,6 +4,10 @@ function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement,
       debugger;
       
       var bid_price = $('#bid_price').val();
+      if(bid_price == "" || bid_price == 0) {
+        $('.error').html('Bid value should not be empty or zero');
+        return;
+      }
       var last_bid_price = $('#last_bid_price').val();
       var shop = $('#shop_name').val();
       var data = 'product_id='+prod_id+'&product_name='+prod_name+'&customer_id='+cus_id+'&customer_name='+cus_name+'&bid_price='+bid_price+'&ending_date='+ending_date+'&shop='+shop;
