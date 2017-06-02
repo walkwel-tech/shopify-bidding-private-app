@@ -308,7 +308,7 @@ require 'shopify.php';
   checkexpired();
   var app_url = 'https://pink-flamingo.herokuapp.com';
   function checkexpired() {
-    
+    debugger;
     var data = 'shop='+shop_name;
     $.ajax({
       type: 'POST',
