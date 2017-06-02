@@ -307,14 +307,14 @@ require 'shopify.php';
   $('.table').DataTable();
   var shop_name = '<?php echo $_GET['shop']; ?>';
   checkexpired();
-  
+  var app_url = 'https://pink-flamingo.herokuapp.com/';
   function checkexpired() {
     
     var data = 'shop='+shop_name;
     $.ajax({
       type: 'POST',
       data: data,
-      url: "http://192.168.10.201/pink-flamingo/flamingo-bidding/bid_handle.php?mode=11",
+      url: app_url+"/bid_handle.php?mode=11",
       success:function(response) {
         debugger;
         $('.loading').hide();
@@ -335,7 +335,7 @@ require 'shopify.php';
     $.ajax({
       type: 'POST',
       data: data,
-      url: "http://192.168.10.201/pink-flamingo/flamingo-bidding/bid_handle.php?mode=3",
+      url: app_url+"/bid_handle.php?mode=3",
       success:function(response) {
         $('#show_bids').html(response);
         
@@ -357,7 +357,7 @@ require 'shopify.php';
     $.ajax({
       type: 'POST',
       data: data,
-      url: "http://192.168.10.201/pink-flamingo/flamingo-bidding/bid_handle.php?mode=9",
+      url: app_url+"/bid_handle.php?mode=9",
       success:function(response) {
        debugger;
         if(response != "" && response != '[]') {
@@ -403,7 +403,7 @@ require 'shopify.php';
       $.ajax({
       type: 'POST',
       data: data,
-      url: "http://192.168.10.201/pink-flamingo/flamingo-bidding/bid_handle.php?mode=10",
+      url: app_url+"/bid_handle.php?mode=10",
       success:function(response) {
        debugger;
         if(response != "" && response != '[]') {
@@ -448,7 +448,7 @@ require 'shopify.php';
     $.ajax({
       type: 'POST',
       data: data,
-      url: "http://192.168.10.201/pink-flamingo/flamingo-bidding/bid_handle.php?mode=8",
+      url: app_url+"/bid_handle.php?mode=8",
       success:function(response) {
         console.log(response);
         if(response) {
@@ -479,7 +479,7 @@ require 'shopify.php';
      $.ajax({
       type: 'POST',
       data: data,
-      url: "http://192.168.10.201/pink-flamingo/flamingo-bidding/bid_handle.php?mode=5",
+      url: app_url+"/bid_handle.php?mode=5",
       success:function(response) {
         location.reload();
       },

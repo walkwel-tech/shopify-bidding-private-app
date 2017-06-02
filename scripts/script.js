@@ -1,4 +1,4 @@
-var app_url = 'http://192.168.10.201/pink-flamingo/flamingo-bidding';
+var app_url = 'https://pink-flamingo.herokuapp.com';
 
 function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement, ending_date){
       debugger;
