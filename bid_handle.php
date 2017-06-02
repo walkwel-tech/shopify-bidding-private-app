@@ -256,6 +256,26 @@ elseif($_GET['mode'] == 11) {
 	echo "Total records expired are: " . $count_update;
 }
 
+//customer bids
+elseif($_GET['mode'] == 12) {
+	$cust_id = $_POST['cust_id'];
+	$query = mysqli_query($conn, "SELECT cb.id as cbid, cb.*, ea.* FROM customer_bids cb INNER JOIN auctions ea ON cb.auc_id = ea.id WHERE cb.user_id = '".$cust_id."' AND cb.delete_status = 0 ") or die(mysqli_error($query));
+	
+	$count = 1;
+	$html = "";
+	while($row = mysqli_fetch_array($query)) {
+		if($row['cbid'] == $cust_id) {
+			$winner = "<span class='text-success'>(winner!!)</span>";
+		}
+		else {
+			$winner = "<span class='text-danger'>No Luck!!</span>";
+		}
+		$html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/admin/customers/".$row['product_id']."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/admin/customers/".$row['product_id']."'>".$row['product_name']."</a> </td><td>$ ".$row['bid_price'].".00</td><td>$ ".$winner.".00</td></tr>";
+		$count++;
+	}
+	echo $html;
+}
+
 function addmeta($metafields, $data, $conn) {
 
 	$sc = new ShopifyClient($data['shop'], $data['token'], SHOPIFY_API_KEY, SHOPIFY_SECRET);

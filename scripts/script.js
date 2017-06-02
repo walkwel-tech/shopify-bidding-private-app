@@ -137,4 +137,23 @@ function getlastbid(prod_id) {
           });
 }
 
+function accountbids(cust_id) {
+  debugger;
+  var data = 'cust_id='+cust_id;
+          $.ajax({
+            type: 'POST',
+            data: data,
+            url: app_url+"/bid_handle.php?mode=12",
+            success:function(response) {
+              if(response != 0 || response != ""){
+                $('#userbids').html(response);
+                //$('#last_bid_price').val(response);
+              }
+            },
+            error:function(response) {
+              console.log(response);
+            }
+          });
+}
+
 
