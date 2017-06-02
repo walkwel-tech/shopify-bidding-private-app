@@ -270,7 +270,7 @@ elseif($_GET['mode'] == 12) {
 		else {
 			$winner = "<span class='text-danger'>No Luck!!</span>";
 		}
-		$html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".ucwords(str_replace("-"," ",$row['product_name']))."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".ucwords(str_replace("-"," ",$row['product_name']))."'>".$row['product_name']."</a> </td><td> ".$row['bid_price'].".00</td><td>$ ".$winner."</td></tr>";
+		$html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".ucwords(str_replace("-"," ",$row['product_name']))."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".ucwords(str_replace("-"," ",$row['product_name']))."'>".$row['product_name']."</a> </td><td>$ ".$row['bid_price'].".00</td><td> ".$winner."</td></tr>";
 		$count++;
 	}
 	echo $html;
