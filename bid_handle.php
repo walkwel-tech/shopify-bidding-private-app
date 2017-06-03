@@ -71,7 +71,7 @@ elseif($_GET['mode'] == 2) {
 // get bids by customer for admin panel
 elseif($_GET['mode'] == 3) {
 	if($_POST['expired'] == 1) {
-		$query = mysqli_query($conn, "SELECT cb.id as cbid, cb.*, ea.* FROM customer_bids cb INNER JOIN auctions ea ON cb.auc_id = ea.id WHERE cb.auc_id = '".$_POST['auc_id']."' AND cb.delete_status = 0 AND cb.expired = '".$_POST['expired']."' AND ea.winner_bid_id = '' ") or die(mysqli_error($query));
+		$query = mysqli_query($conn, "SELECT cb.id as cbid, cb.*, ea.* FROM customer_bids cb INNER JOIN auctions ea ON cb.auc_id = ea.id WHERE cb.auc_id = '".$_POST['auc_id']."' AND cb.delete_status = 0 AND cb.expired = '".$_POST['expired']."'") or die(mysqli_error($query));
 	}
 	else {
 		$query = mysqli_query($conn, "SELECT cb.id as cbid, cb.*, ea.* FROM customer_bids cb INNER JOIN auctions ea ON cb.auc_id = ea.id WHERE cb.auc_id = '".$_POST['auc_id']."' AND cb.delete_status = 0 AND cb.expired = '".$_POST['expired']."' AND ea.winner_bid_id = ''") or die(mysqli_error($query));
