@@ -303,7 +303,7 @@ require 'shopify.php';
 </body>
 <script>
   $('.loading').hide();
-  $('.table').DataTable();
+  var table = $('.table').DataTable();
   var shop_name = '<?php echo $_GET['shop']; ?>';
   checkexpired();
   var app_url = 'https://pink-flamingo.herokuapp.com';
@@ -337,7 +337,7 @@ require 'shopify.php';
       url: "/bid_handle.php?mode=3",
       success:function(response) {
         $('#show_bids').html(response);
-        
+        table.ajax.reload();
       },
       error:function(response) {
         console.log(response);
