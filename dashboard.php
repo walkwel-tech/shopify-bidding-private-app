@@ -255,7 +255,7 @@ require 'shopify.php';
           <h4 class="modal-title">All Bids</h4>
         </div>
         <div class="modal-body">
-          <table id="bidstable" class="table table-responsive table-bordered table-striped" style="margin-top: 5px;">
+          <table id="bidstable" class="table-responsive table-bordered table-striped" style="margin-top: 5px;">
             <thead>
               <tr class="th_row_heading">
                 <th>ID</th>
