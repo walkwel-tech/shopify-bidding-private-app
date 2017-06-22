@@ -264,7 +264,7 @@ elseif($_GET['mode'] == 12) {
 	$count = 1;
 	$html = "";
 	while($row = mysqli_fetch_array($query)) {
-		if($row['user_id'] == $cust_id) {
+		if($row['cbid'] == $row['winner_bid_id']) {
 			$winner = "<span class='text-success'>(winner!!)</span>";
 		}
 		else {
