@@ -38,7 +38,7 @@ if($_GET['mode'] == 1){
 
 		$token = getToken($shop, $conn);
 		$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
-		$variant_data = array("variant" => array("option1" => $option, "price" => $_POST['bid_price']) );
+		$variant_data = array("variant" => array("option1" => $option, "price" => $_POST['bid_price'], "inventory_policy" => "continue") );
     	$variant = $sc->call('POST', '/admin/products/'.$prod_id.'/variants.json', $variant_data);
     	
     	if($variant['id']) {
@@ -351,11 +351,11 @@ function sentwinner($shop, $prod_id, $conn) {
 				$checkout_data = array("checkout" => array("email" => $to, "line_items" => array(array("variant_id" => $row['variant_id'], "quantity" => 1))));
 
 				$checkout = $sc->call('POST', '/admin/checkouts.json', $checkout_data);
-				echo "<pre>";
-				echo $to. "<br>";
-				print_r($checkout);
-				echo $token ."<br>". $resprice;
-				print_r($row);
+				// echo "<pre>";
+				// echo $to. "<br>";
+				// print_r($checkout);
+				// echo $token ."<br>". $resprice;
+				// print_r($row);
 
 				if(isset($checkout['message'])) {
 					die('Error of capabilities!!');
