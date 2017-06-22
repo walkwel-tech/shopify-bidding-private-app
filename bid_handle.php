@@ -131,7 +131,7 @@ elseif($_GET['mode'] == 6) {
 elseif($_GET['mode'] == 7){
 	$prod_id = $_POST['prod_id'];
 
-	$query = mysqli_query($conn, "SELECT * FROM customer_bids WHERE product_id = '".$prod_id."' AND delete_status = 0 ORDER BY added_at DESC LIMIT 1") or die(mysqli_error($query));
+	$query = mysqli_query($conn, "SELECT * FROM customer_bids WHERE product_id = '".$prod_id."' AND delete_status = 0 AND expired = 0 ORDER BY added_at DESC LIMIT 1") or die(mysqli_error($query));
 	$bid_price = "";
 	while($row = mysqli_fetch_array($query)) {
 		$bid_price = $row['bid_price'];
@@ -542,7 +542,7 @@ function sentwinner($shop, $prod_id, $conn) {
 				
 
 				$mail = mail($to,$subject,$message,$headers);
-				$data['bid_id'] = $row['id'];
+				$data['bid_id'] = $row['customer_bid_id'];
 				$setme = setwinner($conn, $data);
 				if($setme == true) {
 					$setFlag = 1;
