@@ -178,9 +178,11 @@ elseif($_GET['mode'] == 8){
 
     if(empty($check_auc_date) || $cou == 0) {
     	$query2 = mysqli_query($conn, "INSERT INTO auctions(id, product_id, winner_bid_id, auc_start_price, auc_res_price, auc_exp_date, auc_bid_increement, winner_claimed_prod, status) VALUES('', '".$data['prod_id']."', '', '".$data['minprice']."', '".$data['resprice']."', '".$data['enddate']."', '".$data['bid_increement']."', 0, 1)") or die(mysqli_error($query2));
+    	echo "New bid added success!!";
     }
     else {
     	$query2 = mysqli_query($conn, "UPDATE auctions SET auc_start_price = '".$data['minprice']."', auc_res_price = '".$data['resprice']."', auc_exp_date = '".$data['enddate']."', auc_bid_increement = '".$data['bid_increement']."' WHERE product_id = '".$data['prod_id']."' AND status = 1") or die(mysqli_error($query2));
+    	echo "bid updated success!!";
     }
 
     if(date('Y-m-d', strtotime($check_auc_date)) != date('Y-m-d', strtotime($end_date))) {
@@ -193,7 +195,7 @@ elseif($_GET['mode'] == 8){
     addmeta($metafield3, $data, $conn);
     addmeta($metafield4, $data, $conn);
 
-    echo "New bid added success!!";
+    
     
 }
 // get metafields according live auction shopify products
