@@ -127,7 +127,7 @@ function getlastbid(prod_id) {
             url: app_url+"/bid_handle.php?mode=7",
             success:function(response) {
               if(response != 0 || response != ""){
-                $('.last_bid').html('Last Bid : <sup class="dollar">$</sup>'+ response + '.00');
+                $('.last_bid').html('Current Bid : <sup class="dollar-n">$</sup>'+ response + '.00');
                 $('#last_bid_price').val(response);
               }
             },
