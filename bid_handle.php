@@ -173,7 +173,10 @@ elseif($_GET['mode'] == 8){
     $data['resprice'] = $res_price;
     $data['bid_increement'] = $bid_increement;
     $data['enddate'] = $endate;
-    if(empty($check_auc_date)) {
+    $query = mysqli_query($conn, "SELECT * FROM auctions WHERE product_id = '".$data['prod_id']."' AND status = 1");
+    $cou = mysqli_num_rows($query);
+
+    if(empty($check_auc_date) || $cou == 0) {
     	$query2 = mysqli_query($conn, "INSERT INTO auctions(id, product_id, winner_bid_id, auc_start_price, auc_res_price, auc_exp_date, auc_bid_increement, winner_claimed_prod, status) VALUES('', '".$data['prod_id']."', '', '".$data['minprice']."', '".$data['resprice']."', '".$data['enddate']."', '".$data['bid_increement']."', 0, 1)") or die(mysqli_error($query2));
     }
     else {
