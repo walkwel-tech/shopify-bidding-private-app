@@ -354,8 +354,8 @@ function sentwinner($shop, $prod_id, $conn) {
 				echo "<pre>";
 				echo $to. "<br>";
 				print_r($checkout);
-				//echo $prod_id ."<br>". $resprice;
-				print_r($row['variant_id']);
+				echo $prod_id ."<br>". $resprice;
+				print_r($row);
 
 				if(isset($checkout['message'])) {
 					die('Error of capabilities!!');
