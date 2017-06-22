@@ -95,7 +95,7 @@ elseif($_GET['mode'] == 3) {
 // get bids by customer for frontend
 elseif($_GET['mode'] == 4) {
 
-	$query = mysqli_query($conn, "SELECT * FROM customer_bids WHERE product_id = '".$_POST['product_id']."' AND delete_status = 0") or die(mysqli_error($query));
+	$query = mysqli_query($conn, "SELECT * FROM customer_bids WHERE product_id = '".$_POST['product_id']."' AND delete_status = 0 AND expired = 0") or die(mysqli_error($query));
 
 	$count = 1;
 	$html = "";
@@ -259,7 +259,7 @@ elseif($_GET['mode'] == 11) {
 //customer bids
 elseif($_GET['mode'] == 12) {
 	$cust_id = $_POST['cust_id'];
-	$query = mysqli_query($conn, "SELECT cb.id as cbid, cb.*, ea.* FROM customer_bids cb INNER JOIN auctions ea ON cb.auc_id = ea.id WHERE cb.user_id = '".$cust_id."' AND cb.delete_status = 0 ") or die(mysqli_error($query));
+	$query = mysqli_query($conn, "SELECT cb.id as cbid, cb.*, ea.* FROM customer_bids cb INNER JOIN auctions ea ON cb.auc_id = ea.id WHERE cb.user_id = '".$cust_id."' AND cb.delete_status = 0 AND cb.expired = 1 ") or die(mysqli_error($query));
 	
 	$count = 1;
 	$html = "";
