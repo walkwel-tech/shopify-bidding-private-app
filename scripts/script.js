@@ -29,10 +29,12 @@ function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement,
         }
         else {
           placenow(data);
+          $('.last_bid').html('Current Bid : <sup class="dollar-n">$</sup>'+ bid_price + '.00');
         }
       }
       else {
         placenow(data);
+        $('.last_bid').html('Current Bid : <sup class="dollar-n">$</sup>'+ bid_price + '.00');
       }
       
     }
@@ -47,6 +49,7 @@ function placenow(data) {
                   //$('.bidnow1').fadeOut(1000);
                   $('.error').html('');
                   $('#bid_price').val('');
+
                   $('.success').html('Bid Placed Success!!');
                   $('.success').fadeIn(1000);
                 }
