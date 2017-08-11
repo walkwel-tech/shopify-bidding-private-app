@@ -44,8 +44,9 @@ function placenow(data) {
             url: app_url+"/bid_handle.php?mode=1",
             success:function(response) {
                 if(response == 1) {
-                  $('.bidnow1').fadeOut(1000);
+                  //$('.bidnow1').fadeOut(1000);
                   $('.error').html('');
+                  $('#bid_price').val('');
                   $('.success').html('Bid Placed Success!!');
                   $('.success').fadeIn(1000);
                 }
