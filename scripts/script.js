@@ -132,6 +132,7 @@ function getlastbid(prod_id) {
             success:function(response) {
               if(response != 0 || response != ""){
                 $('.last_bid').html('Current Bid : <sup class="dollar-n">$</sup>'+ response + '.00');
+                $('#lastbidd').html('$'+ response + '.00');
                 $('#last_bid_price').val(response);
               }
             },
