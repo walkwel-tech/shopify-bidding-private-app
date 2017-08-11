@@ -131,7 +131,7 @@ function getlastbid(prod_id, increement) {
             url: app_url+"/bid_handle.php?mode=7",
             success:function(response) {
               if(response != 0 || response != ""){
-                var nextprice = response + increement;
+                var nextprice = parseInt(response) + parseInt(increement);
                 $('.last_bid').html('Current Bid : <sup class="dollar-n">$</sup>'+ response + '.00');
                 $('#lastbidd').html('$'+ nextprice + '.00');
                 $('#last_bid_price').val(response);
