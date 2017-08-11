@@ -122,7 +122,7 @@ function getwinner(prod_id, shop) {
           });
 }
 
-function getlastbid(prod_id) {
+function getlastbid(prod_id, increement) {
   debugger;
         var data = 'prod_id='+prod_id;
           $.ajax({
@@ -131,8 +131,9 @@ function getlastbid(prod_id) {
             url: app_url+"/bid_handle.php?mode=7",
             success:function(response) {
               if(response != 0 || response != ""){
+                var nextprice = response + increement;
                 $('.last_bid').html('Current Bid : <sup class="dollar-n">$</sup>'+ response + '.00');
-                $('#lastbidd').html('$'+ response + '.00');
+                $('#lastbidd').html('$'+ nextprice + '.00');
                 $('#last_bid_price').val(response);
               }
             },
