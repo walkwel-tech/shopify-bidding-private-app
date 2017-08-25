@@ -6,6 +6,7 @@ function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement,
       var bid_price = $('#bid_price').val();
       if(bid_price == "" || bid_price == 0) {
         $('.error').html('Bid value should not be empty or zero');
+        $('.success').html('');
         return;
       }
       var last_bid_price = $('#last_bid_price').val();
@@ -13,6 +14,7 @@ function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement,
       var data = 'product_id='+prod_id+'&product_name='+prod_name+'&customer_id='+cus_id+'&customer_name='+cus_name+'&bid_price='+bid_price+'&ending_date='+ending_date+'&shop='+shop;
       if(parseInt(bid_price) < parseInt(min_price)) {
         $('.error').html('Your bid price should be greater than minimum bid price');
+        $('.success').html('');
         return;
       }
 
@@ -21,10 +23,12 @@ function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement,
 
         if(parseInt(last_bid_price) > parseInt(bid_price)) {
           $('.error').html('Your bid price should be greater than last bid price');
+          $('.success').html('');
           return;
         }
         else if( parseInt(bid_price) < tprice ) {
           $('.error').html('Minimum bidding price allowed $' +tprice );
+          $('.success').html('');
           return;
         }
         else {
