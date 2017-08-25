@@ -271,14 +271,18 @@ elseif($_GET['mode'] == 12) {
 	while($row = mysqli_fetch_array($query)) {
 		if($row['cbid'] == $row['winner_bid_id']) {
 			$winner = "<span class='text-success'>(winner!!)</span>";
+			$prod_handle = ucwords(str_replace(" ","-", $row['product_name']));
+			$prod_handle = ucwords(str_replace("/","-", $prod_handle));
+			$html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_name']."</a> </td><td>$ ".$row['bid_price'].".00</td><td> ".$winner."</td></tr>";
+			$count++;
 		}
 		else {
 			$winner = "<span class='text-danger'>No Luck!!</span>";
 		}
-		$prod_handle = ucwords(str_replace(" ","-", $row['product_name']));
-		$prod_handle = ucwords(str_replace("/","-", $prod_handle));
-		$html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_name']."</a> </td><td>$ ".$row['bid_price'].".00</td><td> ".$winner."</td></tr>";
-		$count++;
+		// $prod_handle = ucwords(str_replace(" ","-", $row['product_name']));
+		// $prod_handle = ucwords(str_replace("/","-", $prod_handle));
+		// $html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_name']."</a> </td><td>$ ".$row['bid_price'].".00</td><td> ".$winner."</td></tr>";
+		// $count++;
 	}
 	echo $html;
 }
