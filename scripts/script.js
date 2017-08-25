@@ -155,9 +155,9 @@ function getlastbid(prod_id, increement) {
           });
 }
 
-function accountbids(cust_id) {
+function accountbids(cust_id, shop) {
   debugger;
-  var data = 'cust_id='+cust_id;
+  var data = 'cust_id='+cust_id+'&shop='+shop;
           $.ajax({
             type: 'POST',
             data: data,
@@ -172,11 +172,11 @@ function accountbids(cust_id) {
               console.log(response);
             }
           });
-          currentbids(cust_id);
+          currentbids(cust_id, shop);
 }
 
-function currentbids(cust_id) {
-  var data = 'cust_id='+cust_id;
+function currentbids(cust_id, shop) {
+  var data = 'cust_id='+cust_id+'&shop='+shop;
           $.ajax({
             type: 'POST',
             data: data,
