@@ -30,11 +30,15 @@ function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement,
         else {
           placenow(data);
           $('.last_bid').html('Current Bid : <sup class="dollar-n">$</sup>'+ bid_price + '.00');
+          var nextprice = parseInt(bid_price) + parseInt(increement);
+          $('#lastbidd').html('$'+ nextprice + '.00');
         }
       }
       else {
         placenow(data);
         $('.last_bid').html('Current Bid : <sup class="dollar-n">$</sup>'+ bid_price + '.00');
+        var nextprice = parseInt(bid_price) + parseInt(increement);
+        $('#lastbidd').html('$'+ nextprice + '.00');
       }
       
     }
