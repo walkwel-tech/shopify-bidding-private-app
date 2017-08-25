@@ -16,7 +16,7 @@ function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement,
         return;
       }
 
-      if(last_bid_price > 0) {
+      if(parseInt(last_bid_price) > 0) {
         var tprice = parseInt(last_bid_price) + parseInt(increement);
 
         if(parseInt(last_bid_price) > parseInt(bid_price)) {
@@ -124,6 +124,7 @@ function getwinner(prod_id, shop) {
 
 function getlastbid(prod_id, increement) {
   debugger;
+        $('#bid_price').attr('disabled', true);
         var data = 'prod_id='+prod_id;
           $.ajax({
             type: 'POST',
@@ -135,6 +136,7 @@ function getlastbid(prod_id, increement) {
                 $('.last_bid').html('Current Bid : <sup class="dollar-n">$</sup>'+ response + '.00');
                 $('#lastbidd').html('$'+ nextprice + '.00');
                 $('#last_bid_price').val(response);
+                $('#bid_price').attr('disabled', false);
               }
             },
             error:function(response) {
