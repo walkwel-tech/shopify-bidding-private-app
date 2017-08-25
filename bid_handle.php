@@ -273,7 +273,7 @@ elseif($_GET['mode'] == 12) {
 			$winner = "<span class='text-success'>(winner!!)</span>";
 			$prod_handle = ucwords(str_replace(" ","-", $row['product_name']));
 			$prod_handle = ucwords(str_replace("/","-", $prod_handle));
-			$html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_name']."</a> </td><td>$ ".$row['bid_price'].".00</td><td> ".$winner."</td></tr>";
+			$html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/collections/live-auctions/products/".$prod_handle."'>".$row['product_name']."</a> </td><td>$ ".$row['bid_price'].".00</td><td> ".$winner."</td></tr>";
 			$count++;
 		}
 		else {
@@ -298,7 +298,7 @@ elseif($_GET['mode'] == 13) {
 		
 		$prod_handle = ucwords(str_replace(" ","-", $row['product_name']));
 		$prod_handle = ucwords(str_replace("/","-", $prod_handle));
-		$html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_name']."</a> </td><td>$ ".$row['bid_price'].".00</td></tr>";
+		$html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/collections/live-auctions/products/".$prod_handle."'>".$row['product_name']."</a> </td><td>$ ".$row['bid_price'].".00</td></tr>";
 		$count++;
 	}
 	echo $html;
