@@ -172,6 +172,25 @@ function accountbids(cust_id) {
               console.log(response);
             }
           });
+          currentbids(cust_id);
+}
+
+function currentbids(cust_id) {
+  var data = 'cust_id='+cust_id;
+          $.ajax({
+            type: 'POST',
+            data: data,
+            url: app_url+"/bid_handle.php?mode=13",
+            success:function(response) {
+              if(response != 0 || response != ""){
+                $('#currentbids').html(response);
+                //$('#last_bid_price').val(response);
+              }
+            },
+            error:function(response) {
+              console.log(response);
+            }
+          });
 }
 
 

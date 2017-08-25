@@ -287,6 +287,23 @@ elseif($_GET['mode'] == 12) {
 	echo $html;
 }
 
+//current auction bids of user in order page
+elseif($_GET['mode'] == 13) {
+	$cust_id = $_POST['cust_id'];
+	$query = mysqli_query($conn, "SELECT cb.id as cbid, cb.*, ea.* FROM customer_bids cb INNER JOIN auctions ea ON cb.auc_id = ea.id WHERE cb.user_id = '".$cust_id."' AND cb.delete_status = 0 AND cb.expired = 0 ") or die(mysqli_error($query));
+	
+	$count = 1;
+	$html = "";
+	while($row = mysqli_fetch_array($query)) {
+		
+		$prod_handle = ucwords(str_replace(" ","-", $row['product_name']));
+		$prod_handle = ucwords(str_replace("/","-", $prod_handle));
+		$html .= "<tr><td>".$count."</td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_id']."</a> </td><td><a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."'>".$row['product_name']."</a> </td><td>$ ".$row['bid_price'].".00</td></tr>";
+		$count++;
+	}
+	echo $html;
+}
+
 function addmeta($metafields, $data, $conn) {
 
 	$sc = new ShopifyClient($data['shop'], $data['token'], SHOPIFY_API_KEY, SHOPIFY_SECRET);
