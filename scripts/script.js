@@ -16,7 +16,7 @@ function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement,
         return;
       }
 
-      if(parseInt(last_bid_price) > 0) {
+      if(parseInt(last_bid_price) >= 0) {
         var tprice = parseInt(last_bid_price) + parseInt(increement);
 
         if(parseInt(last_bid_price) > parseInt(bid_price)) {
@@ -25,7 +25,7 @@ function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement,
         }
         else if( parseInt(bid_price) < tprice ) {
           $('.error').html('Minimum bidding price allowed $' +tprice );
-          
+          return;
         }
         else {
           placenow(data);
