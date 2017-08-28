@@ -247,6 +247,7 @@ elseif($_GET['mode'] == 11) {
 	$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
     $data = array("token" => $token, "shop" => $shop);
 	$query = mysqli_query($conn, "SELECT * FROM auctions WHERE status = 1");
+	echo mysqli_num_rows($query);
 	$count_update = 0;
 	while($row = mysqli_fetch_array($query)) {
 		$exp_date = strtotime($row['auc_exp_date']);
