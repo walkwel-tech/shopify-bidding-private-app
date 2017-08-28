@@ -148,6 +148,9 @@ function getlastbid(prod_id, increement) {
                 $('#last_bid_price').val(response);
                 $('#bid_price').attr('disabled', false);
               }
+              else {
+                $('#bid_price').attr('disabled', false);
+              }
             },
             error:function(response) {
               console.log(response);

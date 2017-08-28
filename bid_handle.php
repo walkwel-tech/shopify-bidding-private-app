@@ -247,11 +247,11 @@ elseif($_GET['mode'] == 11) {
 	$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
     $data = array("token" => $token, "shop" => $shop);
 	$query = mysqli_query($conn, "SELECT * FROM auctions WHERE status = 1");
-	echo mysqli_num_rows($query);
+	
 	$count_update = 0;
 	while($row = mysqli_fetch_array($query)) {
 		$exp_date = strtotime($row['auc_exp_date']);
-		echo $exp_date."<br>".$today;
+		//echo $exp_date."<br>".$today;
 		if($exp_date < $today) {
 			$data['prod_id'] = $row['product_id'];
 			$prod_id = $row['product_id'];
@@ -329,8 +329,12 @@ function setwinner($conn, $data) {
 	//$query = mysqli_query($conn, "INSERT INTO auctions(id, product_id, winner_user_id, auc_start_price, auc_res_price, auc_exp_date, auc_bid_increement, winner_claimed_prod) VALUES('', '".$data['prod_id']."', '".$data['user_id']."', '".$data['minprice']."', '".$data['resprice']."', '".$data['enddate']."', '".$data['bid_increement']."', 0)") or die(mysqli_error($query));
 
 	$query = mysqli_query($conn, "UPDATE auctions SET winner_bid_id = '".$data['bid_id']."', status = 0 WHERE product_id = '".$data['prod_id']."' AND winner_bid_id IS NULl OR winner_bid_id = '' ");
-
-    return true;
+	if($query){
+		return true;
+	}
+    else {
+    	return false;
+    }
 }
 
 function sentwinner($shop, $prod_id, $conn) {
@@ -589,16 +593,17 @@ function sentwinner($shop, $prod_id, $conn) {
 		}
 		if($setFlag == 1){
 			echo "email sent success!!";
+			$queryupdate = mysqli_query($conn, "UPDATE customer_bids SET expired = 1 WHERE product_id = '".$data['prod_id']."'");
+
+				
+			$metafield = array("metafield" => array("namespace" => "auction", "key" => "expiredflag", "value" => true, "value_type" => "string") );
+
+		    addmeta($metafield, $data, $conn);
 		}
 		else{
 			echo 0;
 		}	
-		$queryupdate = mysqli_query($conn, "UPDATE customer_bids SET expired = 1 WHERE product_id = '".$data['prod_id']."'");
-
-				
-		$metafield = array("metafield" => array("namespace" => "auction", "key" => "expiredflag", "value" => true, "value_type" => "string") );
-
-	    addmeta($metafield, $data, $conn);
+		
 	}
 	else {
 		echo "email already sent!!";
