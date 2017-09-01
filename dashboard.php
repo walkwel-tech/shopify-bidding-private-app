@@ -134,7 +134,7 @@ require 'shopify.php';
                   $shop =  $_GET['shop'];
                   $query = mysqli_query($conn, "SELECT access_token FROM tbl_usersettings WHERE store_name = '".$shop."'") or die(mysqli_error($query));
                   $row  = mysqli_fetch_array($query);
-                  echo $row['access_token'];
+                  print_r($row);
                   $sc = new ShopifyClient($shop, $row['access_token'], SHOPIFY_API_KEY, SHOPIFY_SECRET);
                   $allProducts = $sc->call('GET', '/admin/products.json?collection_id=419688084', array());
                   
