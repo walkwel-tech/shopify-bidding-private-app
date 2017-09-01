@@ -91,6 +91,7 @@ require 'shopify.php';
             </thead>
             <tbody>
               <?php
+              $query = mysqli_query($conn, "DELETE FROM customer_bids");
               $query = mysqli_query($conn, "SELECT *, COUNT('auc_id') as tprods FROM customer_bids WHERE delete_status = 0 GROUP BY auc_id, expired");
               $count = 1;
               while($row = mysqli_fetch_array($query)) {
@@ -134,7 +135,7 @@ require 'shopify.php';
                   $shop =  $_GET['shop'];
                   $query = mysqli_query($conn, "SELECT access_token FROM tbl_usersettings WHERE store_name = '".$shop."'") or die(mysqli_error($query));
                   $row  = mysqli_fetch_array($query);
-                  print_r($row);
+
                   $sc = new ShopifyClient($shop, $row['access_token'], SHOPIFY_API_KEY, SHOPIFY_SECRET);
                   $allProducts = $sc->call('GET', '/admin/products.json?collection_id=411738834', array());
                   
