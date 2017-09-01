@@ -91,7 +91,7 @@ require 'shopify.php';
             </thead>
             <tbody>
               <?php
-              $query = mysqli_query($conn, "DELETE FROM customer_bids");
+              //$query = mysqli_query($conn, "DELETE FROM customer_bids");
               $query = mysqli_query($conn, "SELECT *, COUNT('auc_id') as tprods FROM customer_bids WHERE delete_status = 0 GROUP BY auc_id, expired");
               $count = 1;
               while($row = mysqli_fetch_array($query)) {
