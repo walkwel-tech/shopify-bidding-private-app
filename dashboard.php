@@ -136,7 +136,7 @@ require 'shopify.php';
                   $row  = mysqli_fetch_array($query);
                   print_r($row);
                   $sc = new ShopifyClient($shop, $row['access_token'], SHOPIFY_API_KEY, SHOPIFY_SECRET);
-                  $allProducts = $sc->call('GET', '/admin/products.json?collection_id=419688084', array());
+                  $allProducts = $sc->call('GET', '/admin/products.json?collection_id=411738834', array());
                   
                   $procount = 1;
                   foreach($allProducts as $product){
