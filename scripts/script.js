@@ -1,7 +1,7 @@
 var app_url = 'https://pink-flamingo.herokuapp.com';
 
 function placemybid(cus_id, cus_name, prod_id, prod_name, min_price, increement, ending_date){
-      debugger;
+      
       
       var bid_price = $('#bid_price').val();
       if(bid_price == "" || bid_price == 0) {
@@ -115,7 +115,7 @@ function getproductbids(prod_id) {
 }
 
 function getwinner(prod_id, shop) {
-  debugger;
+  
           var data = 'prod_id='+prod_id+'&shop='+shop;
           $.ajax({
             type: 'POST',
@@ -133,7 +133,7 @@ function getwinner(prod_id, shop) {
 }
 
 function getlastbid(prod_id, increement) {
-  debugger;
+  
         $('#bid_price').attr('disabled', true);
         var data = 'prod_id='+prod_id;
           $.ajax({
@@ -159,7 +159,7 @@ function getlastbid(prod_id, increement) {
 }
 
 function accountbids(cust_id, shop) {
-  debugger;
+  
   var data = 'cust_id='+cust_id+'&shop='+shop;
           $.ajax({
             type: 'POST',
