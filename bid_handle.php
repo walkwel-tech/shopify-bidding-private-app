@@ -261,6 +261,9 @@ elseif($_GET['mode'] == 11) {
 			$count_update++;
 		}
 	}
+	$query = mysqli_query($conn, "SELECT access_token FROM tbl_usersettings WHERE store_name = '".$shop."'") or die(mysqli_error($query));
+
+	print_r(mysqli_fetch_array($query));
 	echo "Total records expired are: " . $count_update;
 }
 
