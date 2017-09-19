@@ -391,6 +391,7 @@ function sentwinner($shop, $prod_id, $conn) {
 
 		while($row = mysqli_fetch_array($query)) { 
 			$prod_id = $row['product_id'];
+			print_r($row);
 			if($setFlag == 0) {
 				echo "in here";
 				//echo json_encode($checkout_data);
