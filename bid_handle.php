@@ -376,13 +376,13 @@ function sentwinner($shop, $prod_id, $conn) {
 	}
 	
 	if(empty($sentemail) || $sentmail == false) {
-		echo "in";
+
 		$query = mysqli_query($conn, "SELECT cb.*, cv.* FROM customer_bids cb INNER JOIN bid_variants cv ON cb.id = cv.customer_bid_id WHERE cb.product_id = '".$prod_id."' AND cb.bid_price >= '".$resprice."' AND cb.delete_status = 0 AND cb.expired = 0 ORDER BY cb.added_at ASC") or die(mysqli_error($query));
 		$setFlag = 0;
 
 		while($row = mysqli_fetch_array($query)) { 
 			if($setFlag == 0) {
-				
+				echo "in here";
 				//echo json_encode($checkout_data);
 				//die;
 				
