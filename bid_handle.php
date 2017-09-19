@@ -392,11 +392,11 @@ function sentwinner($shop, $prod_id, $conn) {
 				echo "in here";
 				//echo json_encode($checkout_data);
 				//die;
-				
+				if($row['bid_price'] >= $resprice) {
 				$userdata = $sc->call('GET', '/admin/customers/'.$row['user_id'].'.json', array());
 				
 				$to = $userdata['email'];
-
+				
 				$checkout_data = array("checkout" => array("email" => $to, "line_items" => array(array("variant_id" => $row['variant_id'], "quantity" => 1))));
 
 				$checkout = $sc->call('POST', '/admin/checkouts.json', $checkout_data);
@@ -589,7 +589,7 @@ function sentwinner($shop, $prod_id, $conn) {
 				echo  "More headers";
 				$headers .= 'From: <info@pinkflamingoglass.com>' . "\r\n";
 				
-				if($row['bid_price'] >= $resprice) {
+				
 					$mail = mail($to,$subject,$message,$headers);
 					$data['bid_id'] = $row['customer_bid_id'];
 					$setme = setwinner($conn, $data);
