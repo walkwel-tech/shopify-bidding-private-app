@@ -21,6 +21,7 @@ function getToken($shop, $conn) {
 
 // place bid by customer
 if($_GET['mode'] == 1){
+	echo $_POST['shop'];
 	$token = getToken($shop, $conn);
 	echo $token;
 	if(isset($_POST['product_id']) && isset($_POST['customer_id']) && isset($_POST['bid_price'])) {
