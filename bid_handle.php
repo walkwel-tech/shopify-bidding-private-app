@@ -391,7 +391,7 @@ function sentwinner($shop, $prod_id, $conn) {
 
 		while($row = mysqli_fetch_array($query)) { 
 			$prod_id = $row['product_id'];
-			print_r($row);
+
 			if($setFlag == 0) {
 				echo "in here";
 				//echo json_encode($checkout_data);
@@ -402,6 +402,10 @@ function sentwinner($shop, $prod_id, $conn) {
 				$to = $userdata['email'];
 				$vari_id = (int)$row['variant_id'];
 				echo $vari_id;
+				if(!empty($vari_id) && isset($vari_id)) {
+					echo "this vari id";
+					die;
+				}
 				$checkout_data = array("checkout" => array("email" => $to, "line_items" => array(array("variant_id" => $vari_id, "quantity" => 1))));
 
 				$checkout = $sc->call('POST', '/admin/checkouts.json', $checkout_data);
