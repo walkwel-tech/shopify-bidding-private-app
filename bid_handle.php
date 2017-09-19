@@ -609,7 +609,7 @@ function sentwinner($shop, $prod_id, $conn) {
 		    addmeta($metafield, $data, $conn);
 		}
 		else{
-			echo 0;
+			//echo 0;
 		}	
 		
 	}
