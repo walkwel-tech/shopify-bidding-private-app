@@ -37,6 +37,7 @@ if($_GET['mode'] == 1){
 		$prod_id = $_POST['product_id']; 
 
 		$token = getToken($shop, $conn);
+		echo $token;
 		$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
 		$variant_data = array("variant" => array("option1" => $option, "price" => $_POST['bid_price'], "inventory_policy" => "continue") );
     	$variant = $sc->call('POST', '/admin/products/'.$prod_id.'/variants.json', $variant_data);
