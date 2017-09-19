@@ -385,7 +385,7 @@ function sentwinner($shop, $prod_id, $conn) {
 		
 		$cou = mysqli_num_rows($query);
 		echo $cou;
-		die;
+		
 		while($row = mysqli_fetch_array($query)) { 
 			$prod_id = $row['product_id'];
 			if($setFlag == 0) {
