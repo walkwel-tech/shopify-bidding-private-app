@@ -251,7 +251,7 @@ elseif($_GET['mode'] == 11) {
 	$count_update = 0;
 	while($row = mysqli_fetch_array($query)) {
 		$exp_date = strtotime($row['auc_exp_date']);
-		//echo $exp_date."<br>".$today;
+		echo $exp_date."<br>".$today;
 		if($exp_date < $today) {
 			$data['prod_id'] = $row['product_id'];
 			$prod_id = $row['product_id'];
@@ -577,13 +577,14 @@ function sentwinner($shop, $prod_id, $conn) {
 				$headers = "MIME-Version: 1.0" . "\r\n";
 				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-				// More headers
+				echo  "More headers";
 				$headers .= 'From: <developer.walkwel@gmail.com>' . "\r\n";
 				
 
 				$mail = mail($to,$subject,$message,$headers);
 				$data['bid_id'] = $row['customer_bid_id'];
 				$setme = setwinner($conn, $data);
+				echo "<br>". $setme;
 				if($setme == true) {
 					$setFlag = 1;
 				}
