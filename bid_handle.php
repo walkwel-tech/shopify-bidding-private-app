@@ -39,7 +39,7 @@ if($_GET['mode'] == 1){
 
 		$token = getToken($shop, $conn);
 		echo $token;
-		$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
+		$sc = new ShopifyClient('pink-flamingo-glass.myshopify.com', $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
 		$variant_data = array("variant" => array("option1" => $option, "price" => $_POST['bid_price'], "inventory_policy" => "continue") );
     	$variant = $sc->call('POST', '/admin/products/'.$prod_id.'/variants.json', $variant_data);
     	print_r($variant);
