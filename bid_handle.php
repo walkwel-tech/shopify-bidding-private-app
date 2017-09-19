@@ -251,8 +251,9 @@ elseif($_GET['mode'] == 11) {
 	$count_update = 0;
 	while($row = mysqli_fetch_array($query)) {
 		$exp_date = strtotime($row['auc_exp_date']);
-		echo $exp_date."<br>".$today;
+		
 		if($exp_date < $today) {
+			echo "here";
 			$data['prod_id'] = $row['product_id'];
 			$prod_id = $row['product_id'];
 			sentwinner($shop, $prod_id, $conn);
