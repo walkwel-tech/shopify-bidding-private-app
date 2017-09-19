@@ -400,9 +400,9 @@ function sentwinner($shop, $prod_id, $conn) {
 				$checkout_data = array("checkout" => array("email" => $to, "line_items" => array(array("variant_id" => $row['variant_id'], "quantity" => 1))));
 
 				$checkout = $sc->call('POST', '/admin/checkouts.json', $checkout_data);
-				// echo "<pre>";
-				// echo $to. "<br>";
-				// print_r($checkout);
+				echo "<pre>";
+				echo $to. "<br>";
+				print_r($checkout);
 				// echo $token ."<br>". $resprice;
 				// print_r($row);
 
