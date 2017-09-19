@@ -402,7 +402,7 @@ function sentwinner($shop, $prod_id, $conn) {
 				$to = $userdata['email'];
 				$vari_id = (int)$row['variant_id'];
 				echo $vari_id;
-				if(!empty($vari_id) && isset($vari_id)) {
+				if(empty($vari_id) || $vari_id == 0) {
 					echo "this vari id";
 					die;
 				}
