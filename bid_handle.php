@@ -11,21 +11,17 @@ require_once('shopify.php');
 //die;
 
 function getToken($shop, $conn) {
-	echo "here";
+	
 	$query = mysqli_query($conn, "SELECT * FROM tbl_usersettings WHERE store_name = 'pink-flamingo-glass.myshopify.com'") or die(mysqli_error($query));
     $row  = mysqli_fetch_array($query);
-    print_r($row);
+    
     $token = $row['access_token'];
     return $token;
 }
 
 // place bid by customer
 if($_GET['mode'] == 1){
-	echo $_POST['shop'];
-	$shop = $_POST['shop'];
-	$shop = preg_replace('#^https?://#', '', $shop);
-	$token = getToken($shop, $conn);
-	echo $token;
+	
 	if(isset($_POST['product_id']) && isset($_POST['customer_id']) && isset($_POST['bid_price'])) {
 
 	$query = mysqli_query($conn, "SELECT * FROM auctions where product_id = '".$_POST['product_id']."' AND auc_exp_date = '".$_POST['ending_date']."'"); 
@@ -42,14 +38,14 @@ if($_GET['mode'] == 1){
 		$prod_id = $_POST['product_id']; 
 
 		$token = getToken($shop, $conn);
-		
+		echo $token;
 		$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
 		$variant_data = array("variant" => array("option1" => $option, "price" => $_POST['bid_price'], "inventory_policy" => "continue") );
     	$variant = $sc->call('POST', '/admin/products/'.$prod_id.'/variants.json', $variant_data);
     	print_r($variant);
     	if($variant['id']) {
     		$query_ad = mysqli_query($conn, "INSERT INTO bid_variants(id, customer_bid_id, variant_id ) VALUES('', '".$customer_bid_id."', '".$variant['id']."')") or die(mysqli_error($query_ad));
-    		echo $token;
+    		echo 1;
     	}
 		
 	}
