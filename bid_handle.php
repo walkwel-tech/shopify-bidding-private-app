@@ -40,7 +40,7 @@ if($_GET['mode'] == 1){
 		$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
 		$variant_data = array("variant" => array("option1" => $option, "price" => $_POST['bid_price'], "inventory_policy" => "continue") );
     	$variant = $sc->call('POST', '/admin/products/'.$prod_id.'/variants.json', $variant_data);
-    	
+    	print_r($variant);
     	if($variant['id']) {
     		$query_ad = mysqli_query($conn, "INSERT INTO bid_variants(id, customer_bid_id, variant_id ) VALUES('', '".$customer_bid_id."', '".$variant['id']."')") or die(mysqli_error($query_ad));
     		echo 1;
@@ -397,7 +397,7 @@ function sentwinner($shop, $prod_id, $conn) {
 				
 				$to = $userdata['email'];
 				$vari_id = (int)$row['variant_id'];
-				
+
 				$checkout_data = array("checkout" => array("email" => $to, "line_items" => array(array("variant_id" => $vari_id, "quantity" => 1))));
 
 				$checkout = $sc->call('POST', '/admin/checkouts.json', $checkout_data);
