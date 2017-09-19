@@ -21,6 +21,8 @@ function getToken($shop, $conn) {
 
 // place bid by customer
 if($_GET['mode'] == 1){
+	$token = getToken($shop, $conn);
+	echo $token;
 	if(isset($_POST['product_id']) && isset($_POST['customer_id']) && isset($_POST['bid_price'])) {
 
 	$query = mysqli_query($conn, "SELECT * FROM auctions where product_id = '".$_POST['product_id']."' AND auc_exp_date = '".$_POST['ending_date']."'"); 
