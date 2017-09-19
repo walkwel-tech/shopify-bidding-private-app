@@ -385,7 +385,7 @@ function sentwinner($shop, $prod_id, $conn) {
 		
 		$cou = mysqli_num_rows($query);
 		echo $cou;
-		
+
 		while($row = mysqli_fetch_array($query)) { 
 			$prod_id = $row['product_id'];
 			if($setFlag == 0) {
@@ -396,8 +396,9 @@ function sentwinner($shop, $prod_id, $conn) {
 				$userdata = $sc->call('GET', '/admin/customers/'.$row['user_id'].'.json', array());
 				
 				$to = $userdata['email'];
+				$vari_id = (int)$row['variant_id'];
 				
-				$checkout_data = array("checkout" => array("email" => $to, "line_items" => array(array("variant_id" => $row['variant_id'], "quantity" => 1))));
+				$checkout_data = array("checkout" => array("email" => $to, "line_items" => array(array("variant_id" => $vari_id, "quantity" => 1))));
 
 				$checkout = $sc->call('POST', '/admin/checkouts.json', $checkout_data);
 				echo "<pre>";
