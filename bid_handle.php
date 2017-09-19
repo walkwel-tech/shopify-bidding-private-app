@@ -11,7 +11,7 @@ require_once('shopify.php');
 //die;
 
 function getToken($shop, $conn) {
-
+	echo "here";
 	$query = mysqli_query($conn, "SELECT access_token FROM tbl_usersettings WHERE store_name = '".$shop."'") or die(mysqli_error($query));
     $row  = mysqli_fetch_array($query);
     print_r($row);
