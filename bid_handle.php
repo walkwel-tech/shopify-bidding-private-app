@@ -262,9 +262,7 @@ elseif($_GET['mode'] == 11) {
 			$count_update++;
 		}
 	}
-	$query = mysqli_query($conn, "SELECT access_token FROM tbl_usersettings WHERE store_name = '".$shop."'") or die(mysqli_error($query));
-
-	print_r(mysqli_fetch_array($query));
+	
 	echo "Total records expired are: " . $count_update;
 }
 
@@ -402,7 +400,7 @@ function sentwinner($shop, $prod_id, $conn) {
 				
 				$to = $userdata['email'];
 				$vari_id = (int)$row['variant_id'];
-
+				echo $vari_id;
 				$checkout_data = array("checkout" => array("email" => $to, "line_items" => array(array("variant_id" => $vari_id, "quantity" => 1))));
 
 				$checkout = $sc->call('POST', '/admin/checkouts.json', $checkout_data);
