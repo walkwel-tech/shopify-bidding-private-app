@@ -36,6 +36,8 @@ $liver = "";
         header("Location: dashboard.php");   
     }
     else if (isset($_GET['shop'])) {
+         $sql = mysqli_query($conn, "DELETE FROM `tbl_usersettings`");
+         
         $shop = isset($_POST['shop']) ? $_POST['shop'] : $_GET['shop'];
         $shopifyClient = new ShopifyClient($shop, "", SHOPIFY_API_KEY, SHOPIFY_SECRET);
 
