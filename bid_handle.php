@@ -377,7 +377,7 @@ function sentwinner($shop, $prod_id, $conn) {
 	
 	if(empty($sentemail) || $sentmail == false) {
 
-		$query = mysqli_query($conn, "SELECT * FROM bid_variants");
+		$query = mysqli_query($conn, "SELECT cb.*, cv.* FROM customer_bids cb INNER JOIN bid_variants cv ON cb.id = cv.customer_bid_id");
 		$cou = mysqli_num_rows($query);
 		echo $cou;
 		
