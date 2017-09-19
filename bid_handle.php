@@ -377,15 +377,17 @@ function sentwinner($shop, $prod_id, $conn) {
 	
 	if(empty($sentemail) || $sentmail == false) {
 
-		$query = mysqli_query($conn, "SELECT cb.*, cv.* FROM customer_bids cb INNER JOIN bid_variants cv ON cb.id = cv.customer_bid_id WHERE cb.product_id = '".$prod_id."' AND cb.bid_price >= '".$resprice."'");
-		$cou = mysqli_num_rows($query);
-		echo $cou;
+		
+		
 
-		$query = mysqli_query($conn, "SELECT cb.*, cv.* FROM customer_bids cb INNER JOIN bid_variants cv ON cb.id = cv.customer_bid_id WHERE cb.product_id = '".$prod_id."' AND cb.bid_price >= '".$resprice."' AND cb.delete_status = 0 AND cb.expired = 0 ORDER BY cb.added_at ASC") or die(mysqli_error($query));
+		$query = mysqli_query($conn, "SELECT cb.*, cv.* FROM customer_bids cb INNER JOIN bid_variants cv ON cb.id = cv.customer_bid_id WHERE cb.product_id = '".$prod_id."' AND cb.delete_status = 0 AND cb.expired = 0 ORDER BY cb.added_at ASC") or die(mysqli_error($query));
 		$setFlag = 0;
 		
-		
+		$cou = mysqli_num_rows($query);
+		echo $cou;
+		die;
 		while($row = mysqli_fetch_array($query)) { 
+			$prod_id = $row['product_id'];
 			if($setFlag == 0) {
 				echo "in here";
 				//echo json_encode($checkout_data);
@@ -585,32 +587,52 @@ function sentwinner($shop, $prod_id, $conn) {
 				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 				echo  "More headers";
-				$headers .= 'From: <developer.walkwel@gmail.com>' . "\r\n";
+				$headers .= 'From: <info@pinkflamingoglass.com>' . "\r\n";
 				
+				if($row['bid_price'] >= $resprice) {
+					$mail = mail($to,$subject,$message,$headers);
+					$data['bid_id'] = $row['customer_bid_id'];
+					$setme = setwinner($conn, $data);
+					echo "<br>". $setme;
+					if($setme == true && $row['product_id'] == $prod_id) {
+						$setFlag = 1;
+						echo "email sent success!!";
+						$queryupdate = mysqli_query($conn, "UPDATE customer_bids SET expired = 1 WHERE product_id = '".$data['prod_id']."'");
 
-				$mail = mail($to,$subject,$message,$headers);
-				$data['bid_id'] = $row['customer_bid_id'];
-				$setme = setwinner($conn, $data);
-				echo "<br>". $setme;
-				if($setme == true) {
-					$setFlag = 1;
+							
+						$metafield = array("metafield" => array("namespace" => "auction", "key" => "expiredflag", "value" => true, "value_type" => "string") );
+
+					    addmeta($metafield, $data, $conn);
+					}
+				}
+				else {
+					$queryupdate = mysqli_query($conn, "UPDATE customer_bids SET expired = 1 WHERE product_id = '".$data['prod_id']."'");
+
+				
+					$metafield = array("metafield" => array("namespace" => "auction", "key" => "expiredflag", "value" => true, "value_type" => "string") );
+
+				    addmeta($metafield, $data, $conn);
 				}
     			
 			}
 
+			if($row['product_id'] != $prod_id) {
+				$setFlag = 0;
+			}
+
 		}
-		if($setFlag == 1){
-			echo "email sent success!!";
-			$queryupdate = mysqli_query($conn, "UPDATE customer_bids SET expired = 1 WHERE product_id = '".$data['prod_id']."'");
+		// if($setFlag == 1){
+		// 	echo "email sent success!!";
+		// 	$queryupdate = mysqli_query($conn, "UPDATE customer_bids SET expired = 1 WHERE product_id = '".$data['prod_id']."'");
 
 				
-			$metafield = array("metafield" => array("namespace" => "auction", "key" => "expiredflag", "value" => true, "value_type" => "string") );
+		// 	$metafield = array("metafield" => array("namespace" => "auction", "key" => "expiredflag", "value" => true, "value_type" => "string") );
 
-		    addmeta($metafield, $data, $conn);
-		}
-		else{
-			//echo 0;
-		}	
+		//     addmeta($metafield, $data, $conn);
+		// }
+		// else{
+		// 	echo 0;
+		// }	
 		
 	}
 	else {
