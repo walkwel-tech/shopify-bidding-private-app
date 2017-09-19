@@ -38,11 +38,11 @@ if($_GET['mode'] == 1){
 		$prod_id = $_POST['product_id']; 
 
 		$token = getToken($shop, $conn);
-		echo $token;
+		
 		$sc = new ShopifyClient('pink-flamingo-glass.myshopify.com', $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
 		$variant_data = array("variant" => array("option1" => $option, "price" => $_POST['bid_price'], "inventory_policy" => "continue") );
     	$variant = $sc->call('POST', '/admin/products/'.$prod_id.'/variants.json', $variant_data);
-    	print_r($variant);
+    	
     	if($variant['id']) {
     		$query_ad = mysqli_query($conn, "INSERT INTO bid_variants(id, customer_bid_id, variant_id ) VALUES('', '".$customer_bid_id."', '".$variant['id']."')") or die(mysqli_error($query_ad));
     		echo 1;
@@ -206,7 +206,7 @@ elseif($_GET['mode'] == 9) {
 	$shop = $_POST['shop'];
 	$token = getToken($shop, $conn);
 
-	$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
+	$sc = new ShopifyClient('pink-flamingo-glass.myshopify.com', $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
     $getMeta = $sc->call('GET', '/admin/products/'.$prod_id.'/metafields.json', array());
     echo json_encode($getMeta);
 }
@@ -217,7 +217,7 @@ elseif($_GET['mode'] == 10) {
 	$prod_id = $_POST['product_id'];
 	$shop = $_POST['shop'];
 	$token = getToken($shop, $conn);
-	$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
+	$sc = new ShopifyClient('pink-flamingo-glass.myshopify.com', $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
 	$check_q = mysqli_query($conn, "SELECT * FROM customer_bids WHERE product_id = '".$prod_id."'");
 	$count_bids = mysqli_num_rows($check_q);
 	if($count_bids >= 1) {
@@ -246,7 +246,7 @@ elseif($_GET['mode'] == 11) {
 	$today = strtotime(date('M d,Y'));
 	$shop = $_POST['shop'];
 	$token = getToken($shop, $conn);
-	$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
+	$sc = new ShopifyClient('pink-flamingo-glass.myshopify.com', $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
     $data = array("token" => $token, "shop" => $shop);
 	$query = mysqli_query($conn, "SELECT * FROM auctions WHERE status = 1");
 	
@@ -278,7 +278,7 @@ elseif($_GET['mode'] == 12) {
 	$shop = $_POST['shop'];
 	$shop = preg_replace('#^https?://#', '', $shop);
 	$token = getToken($shop, $conn);
-	$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
+	$sc = new ShopifyClient('pink-flamingo-glass.myshopify.com', $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
 	
 
 	while($row = mysqli_fetch_array($query)) {
@@ -309,7 +309,7 @@ elseif($_GET['mode'] == 13) {
 	$shop = $_POST['shop'];
 	$shop = preg_replace('#^https?://#', '', $shop);
 	$token = getToken($shop, $conn);
-	$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
+	$sc = new ShopifyClient('pink-flamingo-glass.myshopify.com', $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
 
 	while($row = mysqli_fetch_array($query)) {
 		$product = $sc->call("GET", '/admin/products/'.$row['product_id'].'.json', array());
@@ -322,7 +322,7 @@ elseif($_GET['mode'] == 13) {
 
 function addmeta($metafields, $data, $conn) {
 
-	$sc = new ShopifyClient($data['shop'], $data['token'], SHOPIFY_API_KEY, SHOPIFY_SECRET);
+	$sc = new ShopifyClient('pink-flamingo-glass.myshopify.com', $data['token'], SHOPIFY_API_KEY, SHOPIFY_SECRET);
     $addmeta = $sc->call('POST', '/admin/products/'.$data['prod_id'].'/metafields.json', $metafields);
     if($addmeta) {
     	$query = mysqli_query($conn, "INSERT INTO product_meta(id, product_id, meta_id ) VALUES('', '".$addmeta['owner_id']."', '".$addmeta['id']."')") or die(mysqli_error($query));
@@ -350,7 +350,7 @@ function sentwinner($shop, $prod_id, $conn) {
 	
 	$data = array("token" => $token, "shop" => $shop, "prod_id" => $prod_id);
 
-	$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
+	$sc = new ShopifyClient('pink-flamingo-glass.myshopify.com', $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
 	$prodMetas = $sc->call('GET', '/admin/products/'.$prod_id.'/metafields.json', array());
 	//print_r($prodMetas);
 	//die;
