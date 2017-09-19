@@ -37,14 +37,14 @@ if($_GET['mode'] == 1){
 		$prod_id = $_POST['product_id']; 
 
 		$token = getToken($shop, $conn);
-		echo $token;
+		
 		$sc = new ShopifyClient($shop, $token, SHOPIFY_API_KEY, SHOPIFY_SECRET);
 		$variant_data = array("variant" => array("option1" => $option, "price" => $_POST['bid_price'], "inventory_policy" => "continue") );
     	$variant = $sc->call('POST', '/admin/products/'.$prod_id.'/variants.json', $variant_data);
     	print_r($variant);
     	if($variant['id']) {
     		$query_ad = mysqli_query($conn, "INSERT INTO bid_variants(id, customer_bid_id, variant_id ) VALUES('', '".$customer_bid_id."', '".$variant['id']."')") or die(mysqli_error($query_ad));
-    		echo 1;
+    		echo $token;
     	}
 		
 	}
