@@ -223,7 +223,7 @@ require 'shopify.php';
             </div>
 
             <div class="form-group">
-              <label for="bid_increement">Increement Rate:</label>
+              <label for="bid_increement">Increment Rate:</label>
               <input type="number" class="form-control" id="bid_increement">
             </div>
 
