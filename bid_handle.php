@@ -380,9 +380,6 @@ function sentwinner($shop, $prod_id, $conn) {
 	
 	if(empty($sentemail) || $sentmail == false) {
 
-		
-		
-
 		$query = mysqli_query($conn, "SELECT cb.*, cv.* FROM customer_bids cb INNER JOIN bid_variants cv ON cb.id = cv.customer_bid_id WHERE cb.product_id = '".$prod_id."' AND cb.delete_status = 0 AND cb.expired = 0 ORDER BY cb.added_at ASC") or die(mysqli_error($query));
 		$setFlag = 0;
 		
@@ -393,7 +390,7 @@ function sentwinner($shop, $prod_id, $conn) {
 			$prod_id = $row['product_id'];
 
 			if($setFlag == 0) {
-				echo "in here";
+				
 				//echo json_encode($checkout_data);
 				//die;
 				if($row['bid_price'] >= $resprice) {
@@ -410,9 +407,9 @@ function sentwinner($shop, $prod_id, $conn) {
 				$checkout_data = array("checkout" => array("email" => $to, "line_items" => array(array("variant_id" => $vari_id, "quantity" => 1))));
 
 				$checkout = $sc->call('POST', '/admin/checkouts.json', $checkout_data);
-				echo "<pre>";
-				echo $to. "<br>";
-				print_r($checkout);
+				// echo "<pre>";
+				// echo $to. "<br>";
+				// print_r($checkout);
 				// echo $token ."<br>". $resprice;
 				// print_r($row);
 
@@ -590,23 +587,21 @@ function sentwinner($shop, $prod_id, $conn) {
 					</table>';
 
 				
-				 // $message = "Dear ".$row['user_name'].", You have won the bid on product <a target='_blank' href='https://test-storewalkwel.myshopify.com/products/".$prod_handle."' >".$row['product_name']."</a>. Please Checkout using below url. Thankyou!!<br><br><br> <a href='".$checkout_url"'>'".$checkout_url."'</a>";
+				 
 
 				// Always set content-type when sending HTML email
 				$headers = "MIME-Version: 1.0" . "\r\n";
 				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-				echo  "More headers";
 				$headers .= 'From: <info@pinkflamingoglass.com>' . "\r\n";
 				
 				
 					$mail = mail($to,$subject,$message,$headers);
 					$data['bid_id'] = $row['customer_bid_id'];
 					$setme = setwinner($conn, $data);
-					echo "<br>". $setme;
+					echo "is mail sent- ". $mail;
 					if($setme == true && $row['product_id'] == $prod_id) {
 						$setFlag = 1;
-						echo "email sent success!!";
+						echo "winner update success!!";
 						$queryupdate = mysqli_query($conn, "UPDATE customer_bids SET expired = 1 WHERE product_id = '".$data['prod_id']."'");
 
 							
